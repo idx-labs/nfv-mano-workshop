@@ -1,5 +1,7 @@
 # OpenBaton Workshop
 
+In this lab the OpenBaton Managmenet and Orchestration (MANO) system will be installed into a Linux virtual machine.
+
 ## About this Repository
 
 The `bootstrap-config-file` and `bootstrap.sh` file were borrowed from the official OpenBaton [installation documentation](https://openbaton.github.io/documentation/nfvo-installation-deb/) for Linux. They are only kept in this repository so that a known working copy of a particular version of the installation and configuration files is used. For non-workshop use, the official installation or a form of it should be used.
@@ -9,6 +11,8 @@ The `bootstrap-config-file` and `bootstrap.sh` file were borrowed from the offic
 ### Create a Virtual Machine
 
 First, create a virtual machine with at least 8GB of memory and 10GB of disk. The example below shows the creation of an OpenStack virtual machine. However, note that this virtual machine could exist in any virtualization infrastructure, for example Amazon Web Services, OpenStack, a local VMWare instance...anywhere a VM can be created that has access to the Internet to obtain packages. It's just an example.
+
+*NOTE: In this example the `openbaton.flavor` would have the appropirate resources or sizing to run a small all in one OpenBaton node.*
 
 ```
 openstack server create \
@@ -22,6 +26,8 @@ openstack server create \
 
 Once the virtual machine has been created, ssh into it and clone this repository.
 
+*NOTE: For the purposes of this workshop, any commands that show the `ubuntu@openbaton` prompt are meant to be run from the virtual machine in which OpenBaton will be installed.*
+
 ```
 ubuntu@openbaton:~$ git clone https://github.com/idx-labs/nfv-mano-workshop.git
 ```
@@ -29,7 +35,7 @@ ubuntu@openbaton:~$ git clone https://github.com/idx-labs/nfv-mano-workshop.git
 Change directories into `nfv-mano-workshop/lab0`.
 
 ```
-ubuntu@openbaton:~$ cd nfv-mano-workshop/lab0
+ubuntu@openbaton:~$ cd ~/nfv-mano-workshop/lab0
 ```
 
 ## Install OpenBaton
@@ -44,7 +50,7 @@ The command starts a screen session with the name of `install`.
 ubuntu@openbaton:~$ screen -R install
 ```
 
-If screen is not installed, then install it.
+If screen is not installed, then install it and run the above command.
 
 ```
 ubuntu@openbaton:~$ apt install screen -y
@@ -53,6 +59,7 @@ ubuntu@openbaton:~$ apt install screen -y
 From that screen session run the bootstrap script.
 
 ```
+ubuntu@openbaton:~$ cd nfv-mano-workshop/lab0
 ubuntu@openbaton2:~/nfv-mano-workshop/lab0$ ./bootstrap.sh release --config-file=`pwd`/bootstrap-config-file
 ```
 ## Access the OpenBaton Web Interface
@@ -125,7 +132,7 @@ ubuntu@openbaton:~$ openbaton project list
 
 ## Install Completed
 
-At this point the initial installation of OpenBaton has been completed. With a running and working OpenBaton installation, further labs maybe completed.
+At this point the initial installation of OpenBaton has been completed. With a working OpenBaton installation, further labs may be completed.
 
 ## Troubleshooting
 
